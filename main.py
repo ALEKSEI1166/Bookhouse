@@ -14,17 +14,17 @@ def get_shops():
 
     command = input( "Введите имя или айди издателя:")
 
-    search_data = session.query(Shop, Shop.name).\
-        join(Stock, Stock.id_shop == Shop.id).\
-        join(Book, Book.id == Stock.id_book).\
-        join(Publisher, Publisher.id == Book.id_publisher)
-    if not str.isdigit(''):
-        _a = search_data.filter(Publisher.id == Book.id_publisher).all()
+    search_data = session.query(Shop).\
+        join(Stock).\
+        join(Book).\
+        join(Publisher)
+    if command.isdigit():
+        _a = search_data.filter(Publisher.id == command).all()
     else:
-        _b = search_data.filter(Publisher.name == Book.id_publisher).all()
-    for record in search_data:
+        _a = search_data.filter(Publisher.name == command).all()
+    for record in _a:
 
-        print(record[1])
+        print(record)
 
 
 publisher1 = Publisher(id=1, name="O\u2019Reilly")
